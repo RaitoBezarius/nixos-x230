@@ -27,6 +27,7 @@
       ./wireguard.nix
       ./dev.nix
       ./entertainement.nix
+      ./gui-theming.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;

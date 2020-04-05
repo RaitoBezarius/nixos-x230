@@ -9,8 +9,9 @@
       youtubeSupport = true;
       vaapiSupport = true;
       vdpauSupport = true;
-      drmSupport = false; # definitely, I'll pass.
+      drmSupport = true; # definitely, I'll pass.
       pulseSupport = true;
-    })
+      vapoursynthSupport = true;
+    }) mpv-with-scripts # let's add some nice scripts.
   ];
 }

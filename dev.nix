@@ -21,12 +21,14 @@
   environment.systemPackages = with pkgs; [
     # Debugging & development tools.
     tcpdump gdb gradle python3Packages.virtualenv
-    telnet man-pages posix_man_pages heaptrack
+    telnet heaptrack strace linuxPackages.perf lshw
     rustup gcc
+    man man-pages posix_man_pages stdman
     pythonFull python3Full binutils jq
     gitAndTools.gitFull
     sqliteInteractive
     config.boot.kernelPackages.bpftrace # yes, I'm really edgy.
+    llvm haskellPackages.ghc
     # System & monitoring tools.
     parted psmisc atop hdparm sdparm whois sysstat nload iftop
     smartmontools pciutils lsof schedtool dmidecode iotop
@@ -34,18 +36,23 @@
     # Shell tools.
     file parallel moreutils finger_bsd
     progress pv mc mkpasswd ripgrep zstd ag pixz
-    mbuffer fd
+    mbuffer fd which bc
+    exfat dosfstools patchutils pmutils
     # File transfer tools.
     rsync rtorrent unison sshfsFuse borgbackup
     # Nix tools.
-    nox nix-prefetch-git
+    inetutils nox nix-prefetch-git nix-prefetch-scripts
     # Video manipulation
     mkvtoolnix-cli ffmpeg-full
     # Image-manipulation tools
     fgallery pngcrush imagemagickBig
-    # Misc
+    # Great tooling
+    beets pdftk pandoc
+    # Misc tooling
+    grim mp3gain aspell
+    # Misc Misc
     zip unzip shared_mime_info p7zip
-    unrar encfs
+    unrar encfs pdftk
   ];
 
   # Locator
