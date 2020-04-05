@@ -25,6 +25,7 @@
       ./ssh.nix
       ./version-control.nix
       ./wireguard.nix
+      ./dev.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
