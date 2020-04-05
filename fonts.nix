@@ -1,12 +1,10 @@
 { pkgs, ... }:
 {
-  fonts ={
+  fonts = {
     fonts = with pkgs; [
+      font-awesome
       noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      fira-code
-      fira-code-symbols
+      cantarell-fonts
       powerline-fonts
       roboto
       roboto-slab
@@ -14,8 +12,9 @@
     ];
 
     fontconfig = {
-      penultimate.enable = true;
+      enable = true;
       defaultFonts = {
+        emoji = ["EmojiOne Color"];
         monospace = ["Source Code Pro for Powerline" "Roboto Mono for Powerline"];
         sansSerif = ["Roboto"];
         serif = ["Roboto Slab"];

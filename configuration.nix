@@ -22,6 +22,7 @@
       ./network.nix
       ./audio.nix
       ./vim.nix
+      ./version-control.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
