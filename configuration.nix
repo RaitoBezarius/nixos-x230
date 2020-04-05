@@ -22,13 +22,19 @@
       ./network.nix
       ./audio.nix
       ./vim.nix
+      ./ssh.nix
       ./version-control.nix
       ./wireguard.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.cleanTmpDir = true; # clean up /tmp during boot  
   networking.hostName = "Thorfinn";
   time.timeZone = "Europe/Paris";
+
+  # Do the garbage collection & optimisation daily.
+  nix.gc.automatic = true;
+  nix.optimise.automatic = true;
 
   users.users.raito = {
     isNormalUser = true;
