@@ -26,6 +26,7 @@
       ./version-control.nix
       ./wireguard.nix
       ./dev.nix
+      ./entertainement.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
