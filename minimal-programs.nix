@@ -6,6 +6,7 @@
     htop
     acpi
     firefox
+    nmap
     kitty
   ];
 }

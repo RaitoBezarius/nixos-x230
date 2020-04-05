@@ -23,6 +23,7 @@
       ./audio.nix
       ./vim.nix
       ./version-control.nix
+      ./wireguard.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
