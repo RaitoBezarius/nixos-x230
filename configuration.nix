@@ -28,6 +28,7 @@
       ./dev.nix
       ./entertainement.nix
       ./gui-theming.nix
+      ./comms.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
