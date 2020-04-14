@@ -29,12 +29,17 @@
       ./entertainement.nix
       ./gui-theming.nix
       ./comms.nix
+      ./remote-builders.nix
     ];
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true; # clean up /tmp during boot  
   networking.hostName = "Thorfinn";
   time.timeZone = "Europe/Paris";
+
+  # Allow me to build.
+  nix.allowedUsers = [ "@wheel" ];
+  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/configuration.nix" "/nix/var/nix/profiles/per-user/root/channels" "/nix/var/nix/profiles/per-user/raito/channels" ];
 
   # Do the garbage collection & optimisation daily.
   nix.gc.automatic = true;
