@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  iconTheme = pkgs.papirus-icon-theme;
+  iconTheme = pkgs.breeze-icons.out;
   themeEnv = ''
     # Qt: remove local overrides
     rm -f ~/.config/Trolltech.conf
@@ -9,7 +9,7 @@ let
     rm -f ~/.config/tk-3.0/settings.ini
 
     # GTK3: use global theme
-    export XDG_DATA_DIRS="${pkgs.arc-theme}/share:$XDG_DATA_DIRS"
+    export XDG_DATA_DIRS="${pkgs.gnome-breeze}/share:$XDG_DATA_DIRS"
 
     # GTK3: add /etc/xdg/gtk-3.0 to search path
     export XDG_CONFIG_DIRS="$/etc/xdg:$XDG_CONFIG_DIRS"
@@ -19,9 +19,9 @@ let
 
     # SVG loader for pixbuf
     export GDK_PIXBUF_MODULE_FILE=$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)
-  
+
     # Qt:
-    export QT_STYLE_OVERRIDE=arc
+    export QT_STYLE_OVERRIDE=breeze
 '';
 in
 {
@@ -37,7 +37,7 @@ in
   environment.etc."xdg/Trolltech.conf" = {
     text = ''
       [Qt]
-      style=Arc
+      style=Breeze
     '';
     mode = "444";
   };
@@ -45,15 +45,16 @@ in
   environment.etc."xdg/gtk-3.0/settings.ini" = {
     text = ''
       [Settings]
-      gtk-icon-theme-name=papirus
-      gtk-theme-name=Arc-Dark
+      gtk-icon-theme-name=breeze
+      gtk-theme-name=Breeze-gtk
     '';
     mode = "444";
   };
 
   environment.systemPackages = with pkgs; [
-    arc-theme
-    adwaita-qt
+    # Breeze
+    breeze-grub
+    breeze-qt5
 
     # Icons (main)
     iconTheme
@@ -61,6 +62,9 @@ in
     # Icons (fallback)
     gnome3.adwaita-icon-theme
     hicolor_icon_theme
+
+    # Tray
+    libappindicator-gtk3
   ];
 
   environment.pathsToLink = [ "/share" ]; # Make applications discoverables by launchers.

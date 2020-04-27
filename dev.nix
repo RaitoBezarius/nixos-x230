@@ -49,7 +49,7 @@
     # Build system
     cmake gnumake
     # Nix tools.
-    nox nix-prefetch-git nix-prefetch-scripts nix-du
+    nox nix-prefetch-git nix-prefetch-scripts
     # Video manipulation
     mkvtoolnix-cli ffmpeg-full
     # Image-manipulation tools

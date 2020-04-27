@@ -18,7 +18,7 @@
 
   # DNS
   services.dnscrypt-proxy2.enable = true;
-  networking.nameservers = [ "127.0.0.1" "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [ "127.0.0.1" "1.1.1.1" "1.1" ];
   services.dnscrypt-proxy2.settings = {
     sources.public-resolvers = {
       urls = [ "https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md" ];

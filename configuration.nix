@@ -39,7 +39,13 @@
 
   # Allow me to build.
   nix.allowedUsers = [ "@wheel" ];
-  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/configuration.nix" "/nix/var/nix/profiles/per-user/root/channels" "/nix/var/nix/profiles/per-user/raito/channels" ];
+  nix.nixPath = [ 
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+    "/nix/var/nix/profiles/per-user/raito/channels"
+    "nixpkgs-overlays=/etc/nixos/overlays"
+  ];
 
   # Do the garbage collection & optimisation daily.
   nix.gc.automatic = true;

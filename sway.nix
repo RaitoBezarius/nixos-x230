@@ -9,6 +9,7 @@
       waybar
       mako
       kanshi
+      brillo # backlight
     ];
   };
 
