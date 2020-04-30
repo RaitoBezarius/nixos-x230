@@ -65,8 +65,6 @@
 
   location.provider = "geoclue2";
 
-  programs.waybar.enable = false;
-
   systemd.user.services.kanshi = {
     description = "Kanshi output autoconfig ";
     wantedBy = [ "graphical-session.target" ];

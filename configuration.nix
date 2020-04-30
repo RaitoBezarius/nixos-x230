@@ -7,30 +7,31 @@
 {
   imports =
     [ <nixos-hardware/lenovo/thinkpad/x230>
-      ./hardware-configuration.nix
-      ./encryption.nix
-      ./security.nix
-      ./i18n.nix
-      ./fonts.nix
-      ./minimal-programs.nix
-      ./bad-programs.nix
-      ./login-manager.nix
-      ./power-management.nix
-      ./mouse.nix
-      ./sway.nix
-      ./zsh.nix
-      ./network.nix
-      ./audio.nix
-      ./vim.nix
-      ./ssh.nix
-      ./version-control.nix
-      ./wireguard.nix
-      ./dev.nix
-      ./entertainement.nix
-      ./gui-theming.nix
-      ./comms.nix
-      ./remote-builders.nix
-    ];
+    ./hardware-configuration.nix
+    ./encryption.nix
+    ./security.nix
+    ./i18n.nix
+    ./fonts.nix
+    ./minimal-programs.nix
+    ./bad-programs.nix
+    ./login-manager.nix
+    ./power-management.nix
+    ./mouse.nix
+    ./sway.nix
+    ./zsh.nix
+    ./network.nix
+    ./audio.nix
+    ./vim.nix
+    ./ssh.nix
+    ./version-control.nix
+    ./wireguard.nix
+    ./dev.nix
+    ./entertainement.nix
+    ./gui-theming.nix
+    ./comms.nix
+    ./remote-builders.nix
+    ./syncthing.nix
+  ];
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.cleanTmpDir = true; # clean up /tmp during boot  
@@ -44,8 +45,21 @@
     "nixos-config=/etc/nixos/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
     "/nix/var/nix/profiles/per-user/raito/channels"
-    "nixpkgs-overlays=/etc/nixos/overlays"
+    # "nixpkgs-overlays=/etc/nixos/overlays"
   ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+    # fix waybar not showing
+    inherit (import "${pkgs.fetchFromGitHub {
+      owner = "petabyteboy";
+      repo = "nixpkgs";
+      rev = "bcc7b9adb0378712e4bd7c0e6f51c095814bc5a6";
+      sha256 = "168i9brs4fabah0c6cgylflvjsjsfmhj3bamzvxpqxiw6fvpb4zh";
+      }}" {}) waybar wofi;
+    })
+  ];
+
 
   # Do the garbage collection & optimisation daily.
   nix.gc.automatic = true;

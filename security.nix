@@ -17,14 +17,28 @@
   };
 
   # DNS
-  services.dnscrypt-proxy2.enable = true;
-  networking.nameservers = [ "127.0.0.1" "1.1.1.1" "1.1" ];
-  services.dnscrypt-proxy2.settings = {
-    sources.public-resolvers = {
-      urls = [ "https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md" ];
-      cache_file = "public-resolvers.md";
-      minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-      refresh_delay = 72;
+  networking.nameservers = [ "::1" "1.1.1.1" "9.9.9.9" "8.8.8.8" "1.0.0.1" ];
+  services.dnscrypt-proxy2 = {
+    enable = true;
+    settings = {
+      ipv6_servers = true;
+      require_dnssec = true;
+      require_nolog = true;
+
+      sources.public-resolvers = {
+        urls = [
+          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v2/public-resolvers.md"
+          "https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md"
+        ];
+        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
+        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
+        refresh_delay = 72;
+      };
     };
   };
+
+  systemd.services.dnscrypt-proxy2.serviceConfig = {
+    StateDirectory = "dnscrypt-proxy2";
+  };
+
 }

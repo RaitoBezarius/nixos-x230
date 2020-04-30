@@ -17,7 +17,7 @@ in
 
       peers = [
         {
-          endpoint = "vpn.vieux.newtype.fr:50999";
+          endpoint = "51.15.242.178:50999";
           allowedIPs = [ "0.0.0.0/0" "::/0" ];
           persistentKeepalive = 25;
           publicKey = "vqyxmx6XAuem+obsJRQeSPoih3DPHmatDxd9ztPnYFs=";
