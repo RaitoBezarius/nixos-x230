@@ -13,7 +13,6 @@
 
     fontconfig = {
       enable = true;
-      penultimate.enable = true;
       defaultFonts = {
         emoji = ["EmojiOne Color"];
         monospace = ["Source Code Pro for Powerline" "Roboto Mono for Powerline"];

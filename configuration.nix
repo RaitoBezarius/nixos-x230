@@ -8,13 +8,13 @@
   imports =
     [ <nixos-hardware/lenovo/thinkpad/x230>
     ./hardware-configuration.nix
+    ./nix.nix
     ./encryption.nix
     ./security.nix
     ./i18n.nix
     ./fonts.nix
     ./minimal-programs.nix
     ./bad-programs.nix
-    ./login-manager.nix
     ./power-management.nix
     ./mouse.nix
     ./sway.nix
@@ -27,10 +27,12 @@
     ./wireguard.nix
     ./dev.nix
     ./entertainement.nix
-    ./gui-theming.nix
+    # ./gui-theming.nix
     ./comms.nix
     ./remote-builders.nix
     ./syncthing.nix
+    ./cachix.nix
+    ./hosts.nix
   ];
 
   boot.loader.efi.canTouchEfiVariables = true;
@@ -38,37 +40,13 @@
   networking.hostName = "Thorfinn";
   time.timeZone = "Europe/Paris";
 
-  # Allow me to build.
-  nix.allowedUsers = [ "@wheel" ];
-  nix.nixPath = [ 
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=/etc/nixos/configuration.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-    "/nix/var/nix/profiles/per-user/raito/channels"
-    # "nixpkgs-overlays=/etc/nixos/overlays"
-  ];
-
-  nixpkgs.overlays = [
-    (self: super: {
-    # fix waybar not showing
-    inherit (import "${pkgs.fetchFromGitHub {
-      owner = "petabyteboy";
-      repo = "nixpkgs";
-      rev = "bcc7b9adb0378712e4bd7c0e6f51c095814bc5a6";
-      sha256 = "168i9brs4fabah0c6cgylflvjsjsfmhj3bamzvxpqxiw6fvpb4zh";
-      }}" {}) waybar wofi;
-    })
-  ];
-
-
-  # Do the garbage collection & optimisation daily.
-  nix.gc.automatic = true;
-  nix.optimise.automatic = true;
+  services.openssh.enable = true;
 
   users.users.raito = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "dialout" ];
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keyFiles = [ ./pubkeys/raito-ssh.pub ]; 
   };
 
   # This value determines the NixOS release from which the default
